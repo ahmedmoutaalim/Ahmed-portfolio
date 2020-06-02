@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'PT Sans', sans-serif;
+    list-style: none;
 }
 html{
 
@@ -139,7 +140,7 @@ span.m-left {
     position: relative;
     top: 80px;
     overflow: hidden;
-  
+    transition: 1.5s all ease;
     display: inline-block;
     
 }
@@ -170,11 +171,9 @@ span.m-left {
 }
 
 .profile-image img{
-
-    width: 400px;
-    margin-top: 50px;
-    border-radius: 5%;
-    height:65vh;
+height: 70vh;
+width: 85%;
+margin-left: 22%;
 }
 
 
@@ -221,7 +220,8 @@ span.m-left {
 
 
 .about-me-info p:nth-child(2),
-.about-me-info p:last-child{
+.about-me-info p:last-child
+                             {
 
     margin-top: 30px;
 }
