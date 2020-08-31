@@ -4,50 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <title>Ahmed portfolio</title>
 </head>
 <body>
 <!-----------------------------------------navbar--------------------------------->
     <div class="container navbar">
          <header>
-               <div class="lgo">
-                   <h1>Ahmed</h1>
+               <div class="lgo" >
+                   <h1  >Ahmed</h1>
                </div>
 
-               <nav>
-                   <ul>
-                       <li><a href="#about me">about me </a></li>
-                       <li><a href="#skills"> skills</a></li>
-                       <li><a href="#work">my work</a></li>
+               <div class="liste">
+                   <ul class="liste_ul">
+                       <li><a class="liste_ul-lien" href="#about">about me </a></li>
+                       <li><a class="liste_ul-lien" href="#skills"> skills</a></li>
+                       <li><a class="liste_ul-lien" href="#work">Portfolio</a></li>
+                       <li><a class="liste_ul-lien" href="#contact">Contact</a></li>
+                       <li><a class="liste_ul-lien" href="#">Login</a></li>
                    </ul>
-               </nav>
 
+                   <div class="contain " id="menu" onclick="myFunction(this)">
+                    <div  class="bar1"></div>
+                    <div  class="bar2"></div>
+                    <div class="bar3"></div>
+                  </div>
+                </div>
+              
          </header>
-
+         <div class="Rmenu hide" id="list">
+            <ul class="show">
+             <li><a class="show_ul-lien" href="#about">about me </a></li>
+             <li><a class="show_ul-lien" href="#skills"> skills</a></li>
+             <li><a class="show_ul-lien" href="#work">Portfolio</a></li>
+             <li><a class="show_ul-lien" href="#contact">Contact</a></li>
+             <li><a class="show_ul-lien" href="#">Login</a></li>
+         </ul>
+     </div>
     </div>
+
+  
+
+
  <!--------------------------------premiere section----------------------------------->
    <div class="container main-info-section">
        <div class="text">
            <h1>
-               <span>H</span>
+               <span class="spn">H</span>
                <span class="m-left">i</span>
                <span class="m-left">,</span>
                <br>
-               <span>I</span>
+               <span class="spn">I</span>
                <span class="m-left">'</span>
                <span class="m-left">m</span>
-               <span class="name">A</span>
+               <span class="name spn">A</span>
                <span class="m-left name">h</span>
                <span class="m-left name">m</span>
                <span class="m-left name">e</span>
                <span class="m-left name">d</span>
                <span class="m-left">,</span>
                <br>
-               <span>W</span>
+               <span class="spn">W</span>
                <span class="m-left">e</span>
                <span class="m-left">b</span>
-               <span>D</span>
+               <span class="spn">D</span>
                <span class="m-left">e</span>
                <span class="m-left">s</span>
                <span class="m-left">i</span>
@@ -58,12 +80,12 @@
                <span class="m-left">.</span>
            </h1>
            <p>css/JavaScript</p>
-           <a href="#contact">contact me</a>
+           <a  class="btn" href="#contact">contact me</a>
         </div>
 
 
           <div class="profile-image">
-              <img src="img/black2.png" alt="myimg">
+              <img src="img/ahmed.png" alt="myimg">
           </div>  
     </div>
 
@@ -186,10 +208,10 @@
     <h1>Contact</h1>
     <form>
         <input type="text" placeholder="Full name">
-        <input type="email" placeholder="Email">
-        <input type="email" placeholder="email@exemple.com" disabled>
+        <input type="email" placeholder="Email" >
+        <input type="email" placeholder="email@exemple.com" >
         <textarea name="message" cols="30" rows="10" placeholder="message"></textarea>
-        <input type="submit">
+        <input class="envoyer" type="submit">
     </form>
 </div>
 
@@ -199,7 +221,15 @@
     <p>2020 Copyright. all Rights Reserved.  </p>
 
 </footer>
-<script src="js/Script.js"></script>
+<script src="js/java.js"></script>
+
+<script>
+    function myFunction(x) {
+      x.classList.toggle("change");
+    }
+
+
+    </script>
 <!-- <script src="js/Animation.gsap.min.js"></script>
 <script src="js/CSSPlugin.min.js"></script>
 <script src="js/ScrollMagic.min.js"></script>
