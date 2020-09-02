@@ -1,3 +1,13 @@
+<?php
+
+include_once('includes/cnx.php');
+include_once('includes/article.php');
+
+$article = new Article;
+$articles = $article ->fetch_all();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +33,7 @@
                        <li><a class="liste_ul-lien" href="#skills"> skills</a></li>
                        <li><a class="liste_ul-lien" href="#work">Portfolio</a></li>
                        <li><a class="liste_ul-lien" href="#contact">Contact</a></li>
-                       <li><a class="liste_ul-lien" href="#">Login</a></li>
+                       <li><a class="liste_ul-lien" href="admin/login.php">Login</a></li>
                    </ul>
 
                    <div class="contain " id="menu" onclick="myFunction(this)">
@@ -40,7 +50,7 @@
              <li><a class="show_ul-lien" href="#skills"> skills</a></li>
              <li><a class="show_ul-lien" href="#work">Portfolio</a></li>
              <li><a class="show_ul-lien" href="#contact">Contact</a></li>
-             <li><a class="show_ul-lien" href="#">Login</a></li>
+             <li><a class="show_ul-lien" href="admin/login.php">Login</a></li>
          </ul>
      </div>
     </div>
@@ -91,32 +101,22 @@
 
 <!-------------------------------------------douxieme section----------------------------------------->
 
-    <div class="container about" id="about">
+    <div class="container about ctr" id="about">
        <h1>About</h1>
        <div class="about-me-info">
+       <?php foreach ($articles as $article) { ?>
            <p>
-            Le Lorem Ipsum est simplement du faux texte employé dans la composition et 
-            la mise en page avant impression. Le Lorem Ipsum 
-            est le faux texte standard de l'imprimerie depuis les années 1500
+         <?php echo $article['article_content'] ; ?>
            </p>
-           <p>
-            Le Lorem Ipsum est simplement du faux texte employé dans la composition et 
-            la mise en page avant impression. Le Lorem Ipsum 
-            est le faux texte standard de l'imprimerie depuis les années 1500
-           </p>
-           <p>
-            Le Lorem Ipsum est simplement du faux texte employé dans la composition et 
-            la mise en page avant impression. Le Lorem Ipsum 
-            est le faux texte standard de l'imprimerie depuis les années 1500
-           </p>
+       <?php } ?>
        </div>
-           <img src="img/pointer.png" alt="">
+           <img class="image"  src="img/pointer.png" alt="">
     </div>
 
 
 <!---------------------------------------------troisiemé section--------------------------->    
 
-   <div class="container skills" id="skills">
+   <div class="container skills ctr skl" id="skills">
       <h1>Skills</h1>
       <p class="skills-info"> Le Lorem Ipsum est simplement du faux texte employé dans la composition et 
         la mise en page avant impression. Le Lorem Ipsum 
@@ -160,7 +160,18 @@
          <div class="html"> 
 
              <div class="tag-designing">
-                 <p>designing</p>
+                 <p>Php</p>
+             </div>
+
+             <div class="progressbar">
+                 <div class="bar-design"></div>
+             </div>
+
+         </div>
+         <div class="html"> 
+
+             <div class="tag-designing">
+                 <p>MySql</p>
              </div>
 
              <div class="progressbar">
@@ -172,14 +183,14 @@
    </div>
 
 
-   <div class="container work" id="work">
+   <div class="container work ctr" id="work">
        <h1>Work</h1>
        <div class="work-category">
            <button id="designing" class="active" > Web Designing</button>
            <button id="animation" > Web Animation</button>
            <button id="project" >React projects</button>
        </div>
-     <section class="selectAll"> 
+     <section class="selectAll screen"> 
        <div class="category-designing "> 
            <a href=""><img src="img/1.png"></a>
            <!-- <a href=""><img src="img/2.png"></a>
@@ -208,9 +219,8 @@
     <h1>Contact</h1>
     <form>
         <input type="text" placeholder="Full name">
-        <input type="email" placeholder="Email" >
-        <input type="email" placeholder="email@exemple.com" >
-        <textarea name="message" cols="30" rows="10" placeholder="message"></textarea>
+        <input type="email" placeholder="Email@exemple.com" >
+        <textarea name="message" cols="30" rows="10" placeholder="Message"></textarea>
         <input class="envoyer" type="submit">
     </form>
 </div>
@@ -221,6 +231,8 @@
     <p>2020 Copyright. all Rights Reserved.  </p>
 
 </footer>
+
+
 <script src="js/java.js"></script>
 
 <script>
