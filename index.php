@@ -3,8 +3,13 @@
 include_once('includes/cnx.php');
 include_once('includes/article.php');
 
+
 $article = new Article;
 $articles = $article ->fetch_all();
+
+
+
+
 
 ?>
 
@@ -108,7 +113,7 @@ $articles = $article ->fetch_all();
            <p>
          <?php echo $article['article_content'] ; ?>
            </p>
-       <?php } ?>
+       <?php  } ?>
        </div>
            <img class="image"  src="img/pointer.png" alt="">
     </div>
@@ -183,6 +188,8 @@ $articles = $article ->fetch_all();
    </div>
 
 
+
+
    <div class="container work ctr" id="work">
        <h1>Work</h1>
        <div class="work-category">
@@ -190,9 +197,10 @@ $articles = $article ->fetch_all();
            <button id="animation" > Web Animation</button>
            <button id="project" >React projects</button>
        </div>
+
      <section class="selectAll screen"> 
        <div class="category-designing "> 
-           <a href=""><img src="img/1.png"></a>
+       <a href=""><?php  echo '<img src="img/'.$article['article_img'].'"width="280px" height=300px"/> '?> </a>
            <!-- <a href=""><img src="img/2.png"></a>
            <a href=""><img src="img/3.png"></a>
            <a href=""><img src="img/2.png"></a>
@@ -200,7 +208,7 @@ $articles = $article ->fetch_all();
         </div>
        <div class="category-animation hideCategory"> 
            <a href=""><img src="img/1.png"></a>
-           <a href=""><img src="img/2.png"></a>
+        
            <!-- <a href=""><img src="img/3.png"></a>
            <a href=""><img src="img/2.png"></a> -->
            
@@ -211,10 +219,14 @@ $articles = $article ->fetch_all();
            <a href=""><img src="img/3.png"></a>
            <a href=""><img src="img/2.png"></a>
         </div>
+        
     </section>    
    </div>
 
    <!------------------------------------------------quatrieme section----------------->
+
+
+
 <div class="container contact" id="contact">
     <h1>Contact</h1>
     <form>

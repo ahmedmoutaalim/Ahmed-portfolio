@@ -1,56 +1,3 @@
-<?php
-
-// echo md5('password');
-session_start();
-
-
-  include_once('../includes/cnx.php');
-
-  if (isset($_POST['username'], $_POST['password'])){
-          
-    $username = $_POST['username'];
-    $password = md5($_POST['password']);
-
-    if(empty($username) or empty($password)){
-
-        $error = 'All fields are required !';
-    }else{
-        $sql="SELECT * FROM users WHERE user_name = ? AND user_password = ?";
-        $query = $pdo->prepare($sql);
-        $query -> bindValue(1, $username);
-        $query -> bindValue(2, $password);
-      
-        $query->execute();
-
-        $data=$query->fetch(PDO::FETCH_ASSOC);
-        $userid=$data['id_user'];
-
-        $_SESSION['currentid']=$userid;
-
-        $num = $query -> rowCount();
-
-        if($num == 1){
-
-            header('Location:crudList.php');
-          
-            exit();
-        } else {
-
-            $error =' Incorrect details !';
-     
-        }
-
-    }
-}
-
-?>
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +7,6 @@ session_start();
     <title>Document</title>
 </head>
 <body>
-    
 
 
 <div class="container navbar">
@@ -98,40 +44,5 @@ session_start();
      </div>
     </div>
 
-
-
-
- 
-<div class="container contact" id="contact">
-<h2 class="login">Login</h2>
-
-
-<?php  if (isset($error))  { ?>
-
-<small class="small"><?php echo $error; ?><br>
-
-<?php }?>
-
-    <form action="login.php" method="post" autocomplete="off">
-        <input type="text" name="username" placeholder="Full name">
-        <input type="password" name="password" placeholder="Password" >
-        <input class="sub" type="submit" value="valider">
-    </form>
-
-    <a href="../index.php">&larr; Accueil</a>
-</div>
-
-<script src="../js/js.js"></script>
-
-<script>
-    function myFunction(x) {
-      x.classList.toggle("change");
-    }
-
-
-
-</script>
-</body>
+    </body>
 </html>
-
- 

@@ -1,4 +1,51 @@
+<?php
 
+session_start();
+
+include_once('../includes/cnx.php');
+include_once('../includes/article.php');
+
+
+
+
+$id=$_SESSION['currentid'];
+
+
+if(isset( $_POST['content'],$_FILES['img'])){
+
+
+$content= nl2br($_POST['content']);
+
+$img=$_FILES['img']['name'];
+$upload="../img/".$img;
+move_uploaded_file($_FILES['img']['tmp_name'],$upload);
+$id=$_POST['user'];
+
+
+
+
+   if( empty($content)or empty($img)){
+
+    $error = 'All fields are required !';
+
+   }else{
+       $query = $pdo->prepare("SELECT * FROM users");
+       $query = $pdo -> prepare('INSERT INTO articles (article_content , article_img , article_timestamp, id_user) VALUES(?, ? , ? , ?) ');
+
+       
+       $query -> bindValue(1,$content);
+       $query -> bindValue(2,$img);
+       $query -> bindValue(3,time());
+       $query -> bindValue(4,$id);
+  
+   
+       $query -> execute();
+
+       header('Location:../index.php');
+   }
+
+}
+?>
 
 
 
@@ -50,11 +97,28 @@
 
 
 
+    <h4>Add Article</h4>
 
+<?php  if (isset($error))  { ?>
 
+<small style = "color:#aa0000;"><?php echo $error; ?><br><br>
 
+<?php }?>
 
+<?php  if (isset($msg))  { ?>
 
+<small style = "color: green;"><?php echo $msg; ?><br><br>
+
+<?php }?>
+
+<form   class="form-inline my-2 my-lg-0" action="controle.php" method="post" autocomplete="off" enctype="multipart/form-data" >
+<input type="hidden" name="user" value="<?php echo $id; ?>">
+ <textarea  name="content" placeholder="content" cols="35" rows="10"></textarea><br><br>
+ <input   type="file" name="img"><br><br>
+ <input    type="submit" value = "add article">
+ 
+ 
+</form>
 
 
     
