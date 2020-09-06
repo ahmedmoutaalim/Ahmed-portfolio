@@ -1,50 +1,30 @@
-<?php
+<?php 
 
 session_start();
-
-include_once('../includes/cnx.php');
-include_once('../includes/article.php');
-
+   include_once('../includes/cnx.php');
+   include_once('../includes/article.php');
 
 
-
-$id=$_SESSION['currentid'];
-
-
-if(isset( $_POST['content'],$_FILES['img'])){
-
-
-$content= nl2br($_POST['content']);
-
-$img=$_FILES['img']['name'];
-$upload="../img/".$img;
-move_uploaded_file($_FILES['img']['tmp_name'],$upload);
-$id=$_POST['user'];
+ 
+   $article = new Article; 
 
 
 
+if(isset($_GET['id'])){
 
-   if( empty($content)or empty($img)){
+    $id = $_GET['id'];
 
-    $error = 'All fields are required !';
-
-   }else{
-       $query = $pdo->prepare("SELECT * FROM users");
-       $query = $pdo -> prepare('INSERT INTO articles (article_content , article_img , article_timestamp, id_user) VALUES(?, ? , ? , ?) ');
-
-       
-       $query -> bindValue(1,$content);
-       $query -> bindValue(2,$img);
-       $query -> bindValue(3,time());
-       $query -> bindValue(4,$id);
-  
-   
-       $query -> execute();
-
-       header('Location:../index.php');
-   }
+    $query = $pdo -> prepare('DELETE FROM articles WHERE article_id = ? ');
+    $query ->bindValue(1 , $id);
+    $query -> execute();
+     header('Location:delete.php');
 
 }
+
+
+$articles = $article -> fetch_all();
+
+
 ?>
 
 
@@ -55,7 +35,7 @@ $id=$_POST['user'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/Style.css">
+    <link rel="stylesheet" href="../css/Css.css">
     <title>Document</title>
 </head>
 <body>
@@ -95,41 +75,35 @@ $id=$_POST['user'];
     </div>
 
 
+    <h2 class="login">delete article</h2>
+
+<div align="center"   class="delete select" >
 
 
-    <h4>Add Article</h4>
 
-<?php  if (isset($error))  { ?>
+<h4 style="text-align: center; color: #ed5565;">Select an article to delete :</h4>
 
-<small style = "color:#aa0000;"><?php echo $error; ?><br><br>
+<form style="margin-top: 5%; "   action="delete.php" method="get" >
 
-<?php }?>
+<select class="form-control select-css" onchange="this.form.submit();" name="id">
 
-<?php  if (isset($msg))  { ?>
+  <?php  foreach ($articles as $article){ ?>
+      
+    <option value="<?php echo $article['article_id'] ;?>">
+    <?php echo $article['article_img']; ?>
+    </option>
+  <?php }?>
+</select>
 
-<small style = "color: green;"><?php echo $msg; ?><br><br>
 
-<?php }?>
 
-<form   class="form-inline my-2 my-lg-0" action="controle.php" method="post" autocomplete="off" enctype="multipart/form-data" >
-<input type="hidden" name="user" value="<?php echo $id; ?>">
- <textarea  name="content" placeholder="content" cols="35" rows="10"></textarea><br><br>
- <input   type="file" name="img"><br><br>
- <input    type="submit" value = "add article">
- 
- 
+
 </form>
 
 
-    
-<script src="../js/controle.js"></script>
+</div>
 
-<script>
-    function myFunction(x) {
-      x.classList.toggle("change");
-    }
-
-
-    </script>
+<a href="crudList.php" >&larr; Go back</a>
 </body>
 </html>
+

@@ -1,29 +1,52 @@
-  
 <?php
- session_start();
-   include_once('../includes/cnx.php');
+
+session_start();
+
+include_once('../includes/cnx.php');
+include_once('../includes/article.php');
+
+
+
+
+$id=$_SESSION['currentid'];
+
+
+if(isset( $_POST['content'],$_FILES['img'])){
+
+
+$content= nl2br($_POST['content']);
+
+$img=$_FILES['img']['name'];
+$upload="../img/".$img;
+move_uploaded_file($_FILES['img']['tmp_name'],$upload);
+$id=$_POST['user'];
+
+
+
+
+   if( empty($content) or empty($img)){
+
+    $error = 'All fields are required !';
+
+   }else{
+       $query = $pdo->prepare("SELECT * FROM users");
+       $query = $pdo -> prepare('INSERT INTO articles (article_content , article_img , article_timestamp, id_user) VALUES(?, ? , ? , ?) ');
+
+       
+       $query -> bindValue(1,$content);
+       $query -> bindValue(2,$img);
+       $query -> bindValue(3,time());
+       $query -> bindValue(4,$id);
   
-   include_once('../includes/suggest.php');
    
-   $suggest = new suggest;
-   
-   $sug = $suggest -> call();
+       $query -> execute();
 
-   if(isset($_GET['delete'])){
-      $id = $_GET['delete'];
-
-      $query = $pdo -> prepare("DELETE FROM suggests WHERE id_suggest = '$id' ");
-      $query ->bindValue(1 , $id);
-      $query -> execute();
-
-
+       $msg = 'your article ready';
    }
 
-   
-
- 
-
+}
 ?>
+
 
 
 
@@ -32,13 +55,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <link rel="stylesheet" href="../css/Style.css">
     <title>Document</title>
 </head>
 <body>
-
-
 <div class="container navbar">
          <header>
                <div class="lgo" >
@@ -73,59 +93,43 @@
          </ul>
      </div>
     </div>
-   
-<h4 class="login">crud </h4>
-
-
-<div class="box">
-
-  <a href="add.php">add Articale</a>
-  <a href="delete.php">delete Articale</a>
-  <a href="logout.php">Logout</a>
-
-</div>
 
 
 
 
-           <button class="showbtn" id="show" > suggests</button>
-    
+    <h2 class="login">Add Article</h2>
 
+<?php  if (isset($error))  { ?>
 
-<section class="hd" id="hidden">
-<p>test</p>
+<small style = "color:#aa0000;margin-left:32%;"><?php echo $error; ?><br><br>
 
-<?php foreach ($sug as $suggest) { ?>
+<?php }?>
+
+<?php  if (isset($msg))  { ?>
+
+<small style = "color: green;margin-left:32%;"><?php echo $msg; ?><br><br>
+
+<?php }?>
+
+<form   class="form-inline my-2 my-lg-0" action="add.php" method="post" autocomplete="off" enctype="multipart/form-data" >
+<input type="hidden" name="user" value="<?php echo $id; ?>">
+ <textarea  name="content" placeholder="content" cols="35" rows="10"></textarea><br><br>
+ <input   type="file" name="img"><br><br>
+ <input    type="submit" value = "add article">
  
- <li class="lign">
- <p href="suggest.php?id=<?php echo $suggest['id_suggest'] ;?>">
-    <?php echo $suggest['suggest_name'] ; ?>
-   </p>
-   <small style="color:green;" >
-   
-    </small>
+ 
+</form>
 
-    <p><?php echo $suggest['suggest_email']; ?></p>
-    <p><?php echo $suggest['suggest_message']; ?></p>
+<a style="margin-Bottom: 30%;" href="crudList.php">&larr; Go back</a>
+    
+<script src="../js/controle.js"></script>
 
-
-  <a href="crudList.php?delete=<?php echo $suggest['id_suggest']; ?>">delete</a>
-
- </li>
-<?php  } ?>   
-
-</section>
-
-
-
-
-<script src="../js/suggests.js"></script>    
-  
 <script>
     function myFunction(x) {
       x.classList.toggle("change");
     }
 
-</script>
-    </body>
+
+    </script>
+</body>
 </html>

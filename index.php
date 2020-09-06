@@ -1,11 +1,56 @@
 <?php
 
+session_start();
 include_once('includes/cnx.php');
 include_once('includes/article.php');
+include_once('includes/suggest.php');
 
+
+$id=$_SESSION['currentid'];
 
 $article = new Article;
 $articles = $article ->fetch_all();
+
+
+$suggest = new suggest;
+$sug = $suggest -> call();
+ 
+
+
+if(isset($_POST['name'],$_POST['email'],$_POST['message'])){
+
+   $name = $_POST['name'];
+   $email = $_POST['email'];
+   $message = nl2br($_POST['message']);
+   $id=$_POST['user'];
+ 
+
+   if(empty($name) or empty($email) or empty($message)){
+
+      $error = 'All fields are required !';
+   }else{
+
+      $query = $pdo->prepare("SELECT * FROM users");
+      $query = $pdo -> prepare('INSERT INTO suggests (suggest_name , suggest_email , suggest_message, id_user , suggest_timestamp) VALUES(?,?,?,?,?) ');
+
+      $query -> bindValue(1,$name);
+      $query -> bindValue(2,$email);
+      $query -> bindValue(3,$message);
+      $query -> bindValue(4,$id);
+      $query -> bindValue(5,time());
+
+
+      $query-> execute();
+
+      $msg = 'your suggest was sent';
+
+     
+
+   }
+
+
+
+ }
 
 
 
@@ -200,7 +245,10 @@ $articles = $article ->fetch_all();
 
      <section class="selectAll screen"> 
        <div class="category-designing "> 
+
+       <?php foreach ($articles as $article) { ?>
        <a href=""><?php  echo '<img src="img/'.$article['article_img'].'"width="280px" height=300px"/> '?> </a>
+       <?php } ?>
            <!-- <a href=""><img src="img/2.png"></a>
            <a href=""><img src="img/3.png"></a>
            <a href=""><img src="img/2.png"></a>
@@ -228,11 +276,26 @@ $articles = $article ->fetch_all();
 
 
 <div class="container contact" id="contact">
+
+
     <h1>Contact</h1>
-    <form>
-        <input type="text" placeholder="Full name">
-        <input type="email" placeholder="Email@exemple.com" >
-        <textarea name="message" cols="30" rows="10" placeholder="Message"></textarea>
+    
+<?php  if (isset($error))  { ?>
+
+<small style = "color:#aa0000;margin-left:29%; "><?php echo $error; ?><br><br>
+
+<?php }?>
+
+<?php  if (isset($msg))  { ?>
+
+<small style = "color: green;margin-left:29%; "><?php echo $msg; ?><br><br>
+
+<?php }?>
+    <form action="#contact" method="POST" enctype="multipart/form-data" >
+        <input type="hidden" name="user" value="<?php echo $id; ?>">
+        <input type="text" name="name" placeholder="Full name">
+        <input type="email" name="email" placeholder="Email@exemple.com" >
+        <textarea name="message" name="message" cols="30" rows="10" placeholder="Message"></textarea>
         <input class="envoyer" type="submit">
     </form>
 </div>
