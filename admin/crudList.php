@@ -33,7 +33,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="../css/Style.css">
+    <link rel="stylesheet" href="../css/print.css">
     <title>Document</title>
 </head>
 <body>
@@ -51,7 +51,7 @@
                        <li><a class="liste_ul-lien" href="#skills"> skills</a></li>
                        <li><a class="liste_ul-lien" href="#work">Portfolio</a></li>
                        <li><a class="liste_ul-lien" href="#contact">Contact</a></li>
-                       <li><a class="liste_ul-lien" href="admin/login.php">Login</a></li>
+                       <li><a class="liste_ul-lien" href="login.php">Login</a></li>
                    </ul>
 
                    <div class="contain " id="menu" onclick="myFunction(this)">
@@ -69,7 +69,7 @@
              <li><a class="show_ul-lien" href="#skills"> skills</a></li>
              <li><a class="show_ul-lien" href="#work">Portfolio</a></li>
              <li><a class="show_ul-lien" href="#contact">Contact</a></li>
-             <li><a class="show_ul-lien" href="admin/login.php">Login</a></li>
+             <li><a class="show_ul-lien" href="login.php">Login</a></li>
          </ul>
      </div>
     </div>
@@ -92,24 +92,26 @@
     
 
 
-<section class="hd" id="hidden">
-<p>test</p>
+<section  style="   margin-left: auto;
+    margin-right: auto;
+    width: 30em" class="hd" id="hidden">
+
 
 <?php foreach ($sug as $suggest) { ?>
  
  <li class="lign">
- <p href="suggest.php?id=<?php echo $suggest['id_suggest'] ;?>">
-    <?php echo $suggest['suggest_name'] ; ?>
-   </p>
-   <small style="color:green;" >
+
+ <p style="color: white;" href="suggest.php?id=<?php echo $suggest['id_suggest'] ;?>">
+ <span style="color: #48CFAD;" >name :</span>   <?php echo $suggest['suggest_name'] ; ?>
+   </p><br>
    
-    </small>
+   
+    <p style="color: white;" > <span style="color: #48CFAD;" >Email :</span> <?php echo $suggest['suggest_email']; ?></p><br>
+    
+    <p style="color: white;" ><span style="color: #48CFAD;"  >Suggest :</span>   <?php echo $suggest['suggest_message']; ?></p><br>
 
-    <p><?php echo $suggest['suggest_email']; ?></p>
-    <p><?php echo $suggest['suggest_message']; ?></p>
 
-
-  <a href="crudList.php?delete=<?php echo $suggest['id_suggest']; ?>">delete</a>
+  <a style=" text-decoration:none; " href="crudList.php?delete=<?php echo $suggest['id_suggest']; ?>">delete</a><br><br>
 
  </li>
 <?php  } ?>   

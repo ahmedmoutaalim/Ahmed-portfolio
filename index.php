@@ -11,6 +11,15 @@ $id=$_SESSION['currentid'];
 $article = new Article;
 $articles = $article ->fetch_all();
 
+$design = new Article;
+$designs = $design ->fetch_all2();
+$animation = new Article;
+$animations = $animation ->fetch_all3();
+$project = new Article;
+$projects = $project ->fetch_all4();
+
+
+
 
 $suggest = new suggest;
 $sug = $suggest -> call();
@@ -44,12 +53,7 @@ if(isset($_POST['name'],$_POST['email'],$_POST['message'])){
 
       $msg = 'your suggest was sent';
 
-     
-
    }
-
-
-
  }
 
 
@@ -64,7 +68,7 @@ if(isset($_POST['name'],$_POST['email'],$_POST['message'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/Style.css">
+    <link rel="stylesheet" href="css/print.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <title>Ahmed portfolio</title>
@@ -74,9 +78,9 @@ if(isset($_POST['name'],$_POST['email'],$_POST['message'])){
     <div class="container navbar">
          <header>
                <div class="lgo" >
-                   <h1  >Ahmed</h1>
+        <h1>AHMED</h1>
                </div>
-
+            
                <div class="liste">
                    <ul class="liste_ul">
                        <li><a class="liste_ul-lien" href="#about">about me </a></li>
@@ -97,7 +101,7 @@ if(isset($_POST['name'],$_POST['email'],$_POST['message'])){
          <div class="Rmenu hide" id="list">
             <ul class="show">
              <li><a class="show_ul-lien" href="#about">about me </a></li>
-             <li><a class="show_ul-lien" href="#skills"> skills</a></li>
+             <li><a class="show_ul-lien" href="#skills">skills</a></li>
              <li><a class="show_ul-lien" href="#work">Portfolio</a></li>
              <li><a class="show_ul-lien" href="#contact">Contact</a></li>
              <li><a class="show_ul-lien" href="admin/login.php">Login</a></li>
@@ -139,7 +143,7 @@ if(isset($_POST['name'],$_POST['email'],$_POST['message'])){
                <span class="m-left">r</span>
                <span class="m-left">.</span>
            </h1>
-           <p>css/JavaScript</p>
+           <p>Css/JavaScript/Php</p>
            <a  class="btn" href="#contact">contact me</a>
         </div>
 
@@ -154,23 +158,23 @@ if(isset($_POST['name'],$_POST['email'],$_POST['message'])){
     <div class="container about ctr" id="about">
        <h1>About</h1>
        <div class="about-me-info">
+           
        <?php foreach ($articles as $article) { ?>
            <p>
          <?php echo $article['article_content'] ; ?>
            </p>
        <?php  } ?>
+   
        </div>
            <img class="image"  src="img/pointer.png" alt="">
-    </div>
+    </div><br><br><br>
 
 
 <!---------------------------------------------troisiemé section--------------------------->    
 
    <div class="container skills ctr skl" id="skills">
-      <h1>Skills</h1>
-      <p class="skills-info"> Le Lorem Ipsum est simplement du faux texte employé dans la composition et 
-        la mise en page avant impression. Le Lorem Ipsum 
-        est le faux texte standard de l'imprimerie depuis les années</p>
+      <h1>Skills</h1> <br> <br>
+      
          <div class="html"> 
 
              <div class="tag-html">
@@ -240,32 +244,30 @@ if(isset($_POST['name'],$_POST['email'],$_POST['message'])){
        <div class="work-category">
            <button id="designing" class="active" > Web Designing</button>
            <button id="animation" > Web Animation</button>
-           <button id="project" >React projects</button>
+           <button id="project" > realised projects</button>
        </div>
 
      <section class="selectAll screen"> 
-       <div class="category-designing "> 
 
-       <?php foreach ($articles as $article) { ?>
-       <a href=""><?php  echo '<img src="img/'.$article['article_img'].'"width="280px" height=300px"/> '?> </a>
+
+       <div class="category-designing "> 
+       <?php foreach ($designs as $design) { ?>
+       <a href=""><?php  echo '<img src="img/'.$design['screen_design'].'"width="280px" height=200px"/> '?> </a>
        <?php } ?>
-           <!-- <a href=""><img src="img/2.png"></a>
-           <a href=""><img src="img/3.png"></a>
-           <a href=""><img src="img/2.png"></a>
-           <a href=""><img src="img/3.png"></a> -->
         </div>
+
+
        <div class="category-animation hideCategory"> 
-           <a href=""><img src="img/1.png"></a>
-        
-           <!-- <a href=""><img src="img/3.png"></a>
-           <a href=""><img src="img/2.png"></a> -->
+       <?php foreach ($animations as $animation) { ?>
+       <a href=""><?php  echo '<img src="img/'.$animation['screen_animation'].'"width="280px" height=200px"/> '?> </a>
+       <?php } ?>
+       
            
         </div>
        <div class="category-project hideCategory"> 
-           <a href=""><img src="img/1.png"></a>
-           <a href=""><img src="img/2.png"></a>
-           <a href=""><img src="img/3.png"></a>
-           <a href=""><img src="img/2.png"></a>
+       <?php foreach ($projects as $project) { ?>
+       <a href=""><?php  echo '<img src="img/'.$project['screen_project'].'"width="280px" height=200px"/> '?> </a>
+       <?php } ?>
         </div>
         
     </section>    

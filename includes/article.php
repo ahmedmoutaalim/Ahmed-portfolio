@@ -13,6 +13,38 @@ class article {
        return $query-> fetchAll();
 
     }
+    
+    public function fetch_all2(){
+       global $pdo;
+
+       $query = $pdo ->prepare("SELECT * FROM designs");
+       $query -> execute();
+     
+       return $query-> fetchAll();
+
+    }
+
+    public function fetch_all3(){
+       global $pdo;
+
+       $query = $pdo ->prepare("SELECT * FROM animations");
+       $query -> execute();
+     
+       return $query-> fetchAll();
+
+    }
+
+    public function fetch_all4(){
+       global $pdo;
+
+       $query = $pdo ->prepare("SELECT * FROM projects");
+       $query -> execute();
+     
+       return $query-> fetchAll();
+
+    }
+
+
 
     public function fetch_data($article_id){
          global $pdo ; 

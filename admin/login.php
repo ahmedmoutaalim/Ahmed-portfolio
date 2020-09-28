@@ -56,7 +56,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/Style.css">
+    <link rel="stylesheet" href="../css/print.css">
     <title>Document</title>
 </head>
 <body>
@@ -75,7 +75,7 @@ session_start();
                        <li><a class="liste_ul-lien" href="#skills"> skills</a></li>
                        <li><a class="liste_ul-lien" href="#work">Portfolio</a></li>
                        <li><a class="liste_ul-lien" href="#contact">Contact</a></li>
-                       <li><a class="liste_ul-lien" href="admin/login.php">Login</a></li>
+                       <li><a class="liste_ul-lien" href="#">Login</a></li>
                    </ul>
 
                    <div class="contain " id="menu" onclick="myFunction(this)">
@@ -93,7 +93,7 @@ session_start();
              <li><a class="show_ul-lien" href="#skills"> skills</a></li>
              <li><a class="show_ul-lien" href="#work">Portfolio</a></li>
              <li><a class="show_ul-lien" href="#contact">Contact</a></li>
-             <li><a class="show_ul-lien" href="admin/login.php">Login</a></li>
+             <li><a class="show_ul-lien" href="#">Login</a></li>
          </ul>
      </div>
     </div>
@@ -118,7 +118,7 @@ session_start();
         <input class="sub" type="submit" value="valider">
     </form>
 
-    <a href="../index.php">&larr; Accueil</a>
+    <a class="back" href="../index.php">&larr; Accueil</a>
 </div>
 
 <script src="../js/js.js"></script>
